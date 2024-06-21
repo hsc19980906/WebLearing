@@ -7,6 +7,10 @@ using System.Linq;
 
 namespace HelloAspDotNetCore.EFConfigurationProvider
 {
+    /// <summary>
+    /// 创建自定义配置提供程序：
+    /// 当数据库为空时，配置提供程序将其初始化
+    /// </summary>
     public class EFConfigurationProvider:ConfigurationProvider
     {
         Action<DbContextOptionsBuilder> OptionAction { get; }

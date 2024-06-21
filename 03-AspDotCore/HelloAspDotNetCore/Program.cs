@@ -1,9 +1,12 @@
+using HelloAspDotNetCore.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +48,12 @@ namespace HelloAspDotNetCore
             ///（4）EventLog（仅当在Windows上运行时）
             ///四、当应用在Development环境中运行时，启用范围验证和依赖关系验证
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory());
+                    //使用EF ConfigurationProvider
+                    config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
+                })
                 ///ConfigureWebHostDefaults完成以下事情
                 ///（1）用前缀为“ASPNETCORE_”的环境变量加载主机配置
                 ///（2）使用应用的托管配置程序，将Kestrel服务器设置为Web服务器并对其进行配置

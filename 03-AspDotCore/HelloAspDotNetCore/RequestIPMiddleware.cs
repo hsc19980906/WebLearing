@@ -32,4 +32,5 @@ namespace HelloAspDotNetCore
         {
             return builder.UseMiddleware<RequestIPMiddleware>();
         }
+    }
 }
